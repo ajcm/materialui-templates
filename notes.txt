@@ -1,0 +1,1 @@
+docker run -p 8080:80  -v /home/ajcm/git/react-material-ui:/usr/share/nginx/html:ro nginx:alpine

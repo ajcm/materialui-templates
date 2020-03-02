@@ -18,7 +18,7 @@ import {Page1,Page2,Page3,Page4} from './Pages'
       return(
         <ThemeProvider theme={theme}>
          <CssBaseline />
-         <BrowserRouter>
+         <BrowserRouter basename={'/template1'}>
          <NavBar />
            <main>
              <Route exact path="/" component={Page1} />
