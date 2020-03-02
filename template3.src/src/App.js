@@ -21,12 +21,12 @@ import Paper1 from  './Components/Containers/Paper1'
       return(
         <ThemeProvider theme={theme}>
          <CssBaseline />
-         <BrowserRouter>
+         <BrowserRouter basename={'/template3'}>
          <NavBar />
 
            <main>
 
-            <Route exact path='/' basename={'/template3'}  render={() =><Grid1><Page1/></Grid1>}/>
+            <Route exact path='/'   render={() =><Grid1><Page1/></Grid1>}/>
 
 
           <Route

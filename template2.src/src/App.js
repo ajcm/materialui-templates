@@ -24,12 +24,12 @@ import TypesShort from './Components/TypesShort'
       return(
         <ThemeProvider theme={theme}>
          <CssBaseline />
-         <BrowserRouter>
+         <BrowserRouter basename={'/template2'} >
          <NavBar />
 
            <main>
 
-           <Route exact path="/"  basename={'/template2'} render={() =><Grid1><TypesShort/></Grid1>} />
+           <Route exact path="/"  render={() =><Grid1><TypesShort/></Grid1>} />
 
             <Route exact path="/page1" render={() =><Grid1><Types/></Grid1>} />
             <Route exact path="/page2"  render={() =><Grid1></Grid1>} />
