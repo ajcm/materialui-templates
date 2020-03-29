@@ -9,6 +9,7 @@ COPY ./template1/ ./template1/
 COPY ./template2/ ./template2/
 COPY ./template3/ ./template3/
 COPY ./version1/ ./version1/
+COPY ./version2/ ./version2/
 
 WORKDIR '/app/html/template1'
 RUN npm i .
@@ -24,6 +25,10 @@ RUN npm i .
 RUN npm run-script build
 
 WORKDIR '/app/html/version1'
+RUN npm i . 
+RUN npm run-script build
+
+WORKDIR '/app/html/version2'
 RUN npm i . 
 RUN npm run-script build
 

@@ -1,0 +1,26 @@
+const doCall = () => {
+  let promise = new Promise(function(resolve, reject) {
+      setTimeout(() => resolve("done!"), 1000);
+    });
+
+    return promise
+}
+  
+
+
+  // resolve runs the first function in .then
+  doCall().then(
+    result => log(result), // shows "done!" after 1 second
+    error => log(error) // doesn't run
+  );
+
+
+const getCall = async () =>  {
+
+   
+    let x = await   doCall()
+    log(x)
+  }
+
+
+  getCall()
