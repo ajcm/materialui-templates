@@ -126,8 +126,6 @@ const WeatherLocation = (props) => {
 
 
 
-
-
 const Towns = (props) => {
   const classes = styles();
 

@@ -1,5 +1,4 @@
 /* Version 0.2 */
-
 import districts from '../data/districts.json'
 import districtsPerZone from '../data/districtsPerZone.json'
 import locations from '../data/locations.json'
@@ -11,7 +10,6 @@ import httpRequest from './HttpRequest'
 
 
 //export const FORECAST_DISTRICTS_TODAY =  'https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/hp-daily-forecast-day0.json';
-
 export const SERVER_WEATHER_API  =  'https://golias.tugalife.net'
 export const FORECAST_DISTRICTS_TODAY =  '/api/weather/districtsForecast'
 export const LOCATION_REQUEST_URL = '/api/weather/forecast/'
@@ -60,30 +58,28 @@ const WeatherApi =  () => ({
   },
 
   // currentForecast for district locations
-  async getDistrictForecastDay(districId){
-    let districtLocations
+  async getDistrictForecast(districId){
+    let districtLocations = null
+  
+     if (districtLocations =  locationsIdPerDistrict[districId]){
 
-    // if (districtLocations =  locationsIdPerDistrict[districId]){
-    
-    //   console.log(districtLocations)
+        let ff = {}
+        districtLocations.forEach( async (i) =>   {
 
+          ff[i] = await  this.getForecast(i)
+        })
 
-    //   districtLocations.foreach(l => console.log(l))
-    // }
+        return ff
+     }
 
-
-    
+     
   },
 
   async getForecast (locationId){
 
     if (locationId){
-
       let forecast = await requestForecast (locationId)
-
-      console.log("forecast " + locationId + " " + forecast);
-      
-
+    //  console.log("forecast " + locationId + " " + forecast);    
       return forecast
     }    
   },
@@ -93,4 +89,4 @@ const WeatherApi =  () => ({
 
 export const weatherService = WeatherApi()
 
-export default WeatherApi
+
