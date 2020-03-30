@@ -1,19 +1,11 @@
-import React,{Component,Fragment} from 'react'
-import {BrowserRouter,Route } from 'react-router-dom'
-
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
-
-import theme from './theme';
-
-import NavBar from './Components/Layouts/NavBar'
+import React, { Component } from 'react'
+import { BrowserRouter, Route } from 'react-router-dom'
 import Footer from './Components/Layouts/Footer'
-
-import {Home,ForecastLocation,RestRequests,Locations,Districts,Towns} from './Pages'
-
-import Grid1 from  './Components/Containers/Grid1'
-import Paper1 from  './Components/Containers/Paper1'
-
+import NavBar from './Components/Layouts/NavBar'
+import { Home, Locations, Towns } from './Pages'
+import theme from './theme'
 
  class App extends Component {
 
@@ -25,24 +17,9 @@ import Paper1 from  './Components/Containers/Paper1'
          <NavBar />
 
            <main>
-            <Route exact path='/'   render={() =><Home/>}/>
-            <Route exact path='/Districts'   render={() =><Districts/>}/>
-            <Route exact path='/Towns'   render={() =><Towns/>}/>
+            <Route exact path='/'   render={() =><Home/>}/>          
+            <Route exact path='/Towns/:locationId'   render={(props) =><Towns {...props} />}/>
             <Route exact path='/Locations'   render={() =><Locations/>}/>
-
-          <Route
-           path="/debug"
-           render={({ match: { url } }) => (
-             <>
-
-               <Route path={`${url}/RestRequests`} render={() =><Grid1><RestRequests/></Grid1>}  exact />
-               <Route path={`${url}/ForecastLocation`} render={() =><ForecastLocation/>}  exact  />
-
-             </>
-           )}
-         />
-
-
            </main>
            <Footer/>
          </BrowserRouter>

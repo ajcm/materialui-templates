@@ -8,9 +8,13 @@ import {
   Toolbar,
   Typography,
   Select,
-  Paper
+  Paper,
+  Grid
 } from '@material-ui/core'
 
+import Link from '@material-ui/core/Link';
+
+import { BrowserRouter,Route,NavLink } from 'react-router-dom';
 
 import {weatherService} from '../Weather/WeatherApi'
 
@@ -49,25 +53,60 @@ const Local = (props) => {
   
   
   return (  
-    <Paper variant="outlined" style={{padding: '10px' }}>
-    <Typography variant="body" >{local.local}</Typography>
+    <Paper variant="outlined" style={{padding: '10px', marginTop: '10px', backgroundColor: '#cae2ed' }}>
+    <Typography component="body1" variant="body1" >{local.local}</Typography>
+    <p>
+    <NavLink  to={"/Towns/" + local.globalIdLocal}>
+     next days
+    </NavLink>
+    </p>
     </Paper>
   )
 }
 
 
-const District = (props) => {
+
+
+const DistrictExpand = (props) => {
   const classes = useStyles()
-  const {district} = props
-  const locations = weatherService.getLocationsPerDistrict(district.districtId)
-  const locationsForecast = weatherService.getDistrictForecastDay(district.districtId)
+  const {locations,locationsForecast} = props
+  
 
   return (
     
-    <Paper variant="outlined" style={{padding: '10px' }} className={classes.paper} >
-    <Typography variant="h6" >{district.local}</Typography>
+    <Fragment>
+      
     {
       locations.map(l => <Local local={l} forecast={locationsForecast}></Local>)
+    }
+  
+    </Fragment>
+  )
+
+}
+
+
+
+const District = (props) => {
+  const classes = useStyles()
+  const {district} = props
+  const [expand, setExpand] = useState(false);
+
+  const locations = weatherService.getLocationsPerDistrict(district.districtId)
+  const locationsForecast = weatherService.getDistrictForecastDay(district.districtId)
+
+  const toogleExpand = (e) =>{ 
+    setExpand(!expand)
+
+  } 
+
+
+  return (
+    
+    <Paper variant="outlined" style={{padding: '10px', backgroundColor: '#f0f6f7'}} className={classes.paper} onClick={toogleExpand}>
+    <Typography variant="h6" component="h5" style={{color: 'black'}}>{district.local}</Typography>
+    {
+      (expand) ? <DistrictExpand locations={locations} locationsForecast={locationsForecast} /> : ''
     }
     </Paper>
   )
@@ -82,11 +121,11 @@ const Home = (props) => {
   window.weatherService = weatherService
 
   return (
-    <Fragment>
+    <Grid style={{padding: '5px', marginBottom: '20px' }} >
     {
       districts.map(p => <District district={p}></District>)
     }
-    </Fragment>)
+    </Grid>)
 }
 
 

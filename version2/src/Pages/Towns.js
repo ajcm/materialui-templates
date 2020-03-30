@@ -1,20 +1,20 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
-import { Select, Typography } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper'
-import {weatherService} from '../Weather/WeatherApi'
-
-
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import { weatherService } from '../Weather/WeatherApi';
 
+import weatherTypes from '../data/weatherTypes.json'
+import windSpeed from '../data/windSpeed.json'
 
 
 
@@ -42,6 +42,14 @@ const styles  = makeStyles(theme => ({
 
 }));
 
+const StyledTableCell = withStyles((theme) => ({
+ 
+  head: {
+    fontSize: 16,
+  },
+
+}))(TableCell);
+
 
 function formatDate(date){
 
@@ -52,58 +60,67 @@ function formatDate(date){
     weekday: 'long' }) 
 
   
-  const [{value: weekday},,{ value: mo },,{ value: da }] = dtf.formatToParts(d) 
+  const [{value: weekday},,{ value: da },,{ value: mo }] = dtf.formatToParts(d) 
 
   console.log( dtf.formatToParts(d) )
 
-  return `${weekday}, ${da} ${mo}`
+  return `${weekday},  ${da} ${mo}`
 }
 
+function getWind(forecast){
+
+  console.log(windSpeed[forecast.idFfxVento])
+
+  return windSpeed[forecast.idFfxVento] 
+}
+
+//idFfxVentor
 function DataTableRow(props) {
   const classes = styles();
   const {forecast} = props
+  const date = new Date(forecast.dataPrev)
+  const isWeekend = (date.getDay() === 6) || (date.getDay() === 0)
+  const weather = weatherTypes[forecast.idTipoTempo]
+  const wind = getWind(forecast)
 
   return  (
-    <TableRow>
+
+    <TableRow  style={{ backgroundColor: isWeekend ?  '##809bc2' : '#f0f4f7'  }} >
       <TableCell>{formatDate(forecast.dataPrev)}</TableCell>
-      <TableCell>{forecast.idTipoTempo}</TableCell>
-      <TableCell>{forecast.tMin}/{forecast.tMax}</TableCell>
-      <TableCell>{forecast.probabilidadePrecipita}</TableCell>
-      <TableCell>{forecast.idFfxVento} ({forecast.ddVento})</TableCell>
+      <TableCell>{weather.descIdWeatherTypePT}</TableCell>
+      <TableCell>{ Math.round(forecast.tMin)}	&#176; { '  -  '} { Math.round(forecast.tMax)}&#176;</TableCell>
+      <TableCell  align="right">{ Math.round(forecast.probabilidadePrecipita) + ' %' }</TableCell>
+      <TableCell>{wind.descClassWindSpeedDailyPT} ({forecast.ddVento})</TableCell>
     </TableRow>
+
   )
 }
 
 
 const WeatherLocation = (props) => {
-  const {location,forecasts} = props
+  const {location,forecast} = props
 
   return (
-    <Fragment>
-    <p> {location} </p>  
-
+    <Grid style={{padding: '10px', marginTop: '10px' }}>
+  
     <TableContainer>
     <Table>
 
-      <TableHead>
+      <TableHead style={{ margin: '10px', backgroundColor: '#98baeb'}}>
       <TableRow>
-        <TableCell>Dia</TableCell>
-        <TableCell>Estado</TableCell>
-        <TableCell>Temp. min/max</TableCell>
-        <TableCell>Precipitacao</TableCell>
-        <TableCell>Vento</TableCell>
+        <StyledTableCell>Dia</StyledTableCell>
+        <StyledTableCell>Estado</StyledTableCell>
+        <StyledTableCell>Temp. min/max</StyledTableCell>
+        <StyledTableCell>Precipitacao</StyledTableCell>
+        <StyledTableCell>Vento</StyledTableCell>
     
       </TableRow>
       </TableHead>
-      {forecasts ?  forecasts.map(forecast => <DataTableRow forecast={forecast}/>) : ''}
+      {forecast ?  forecast.map(ff => <DataTableRow forecast={ff}/>) : ''}
     </Table>
     </TableContainer>
 
-
-
-    
-
-     </Fragment>
+     </Grid>
   )
 }
 
@@ -111,12 +128,25 @@ const WeatherLocation = (props) => {
 
 
 
-const Towns = () => {
+const Towns = (props) => {
   const classes = styles();
-  const [location,setLocation] = useState();
-  const [forecast,setForecast] = useState();
 
-  const locations = weatherService.getLocations()
+  const locationId = props.match.params.locationId
+  const [forecast,setForecast] = useState();
+  const [location,setLocation] = useState();
+  
+
+  //init
+  useEffect(
+    () => {
+      if (locationId) {
+        let ll = weatherService.getLocation(locationId)
+        setLocation(ll)       
+        getForecast(locationId, (ff) => setForecast(ff))
+      }
+    } 
+  , [])
+
 
   async function getForecast(locationId, callback){
     if (!locationId)
@@ -127,32 +157,17 @@ const Towns = () => {
   }
 
   
-  function onChange(locationId){
-    setLocation(locationId)
-    //http request
-    getForecast(locationId, (ff) => setForecast(ff))
-    
-  }
 
 
   return (
   <Fragment>
 
-  <Paper  variant="outlined"  style={{margin: '10px', padding: '10px' }} >
-  <Typography variant="h6">Towns</Typography>
-
-  <Typography variant="caption" display="block" gutterBottom>
-
-    <Select fullWidth native
-      value={location}
-      onChange={(event) => onChange(event.target.value) } >
-      
-     <option value=''>Choose location</option>
-     {locations.map(l => <option value={l.globalIdLocal}>{l.local} ({l.globalIdLocal}) </option>)}           
-    </Select>     
-  </Typography>
+  <Paper variant="outlined"  style={{margin: '10px', padding: '10px' }} >
+  <Paper variant="outlined"  style={{margin: '10px', padding: '10px' }} >
+    <Typography variant="h6">{ location ? location.local : 'Undefined' }</Typography>
+  </Paper>
     {
-      (location && forecast) ? <WeatherLocation location={location} forecasts={forecast} />  : ''
+      ( forecast && location) ? <WeatherLocation location={location} forecast={forecast} />  : ''
     }
   </Paper>
   </Fragment>)

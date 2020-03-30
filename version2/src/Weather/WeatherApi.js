@@ -3,6 +3,7 @@
 import districts from '../data/districts.json'
 import districtsPerZone from '../data/districtsPerZone.json'
 import locations from '../data/locations.json'
+import locationsMap from '../data/locationsMap.json'
 import locationsPerDistrict from '../data/locationsPerDistrict.json'
 import locationsIdPerDistrict from '../data/locationsIdPerDistrict.json'
 
@@ -40,6 +41,10 @@ const WeatherApi =  () => ({
     return locations
   },
 
+  getLocation(id){
+    return locationsMap[id]
+  },
+
   //all districts
   getDistricts () {
     return districts;
@@ -58,13 +63,15 @@ const WeatherApi =  () => ({
   async getDistrictForecastDay(districId){
     let districtLocations
 
-    if (districtLocations =  locationsIdPerDistrict[districId]){
+    // if (districtLocations =  locationsIdPerDistrict[districId]){
     
-      console.log(districtLocations)
+    //   console.log(districtLocations)
 
 
-      districtLocations.foreach(l => console.log(l))
-    }
+    //   districtLocations.foreach(l => console.log(l))
+    // }
+
+
     
   },
 

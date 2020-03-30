@@ -1,0 +1,147 @@
+{
+    "0": {
+      "descIdWeatherTypeEN": "No information",
+      "descIdWeatherTypePT": "Sem informação",
+      "idWeatherType": 0
+    },
+    "1": {
+      "descIdWeatherTypeEN": "Clear sky",
+      "descIdWeatherTypePT": "Céu limpo",
+      "idWeatherType": 1
+    },
+    "2": {
+      "descIdWeatherTypeEN": "Partly cloudy",
+      "descIdWeatherTypePT": "Céu pouco nublado",
+      "idWeatherType": 2
+    },
+    "3": {
+      "descIdWeatherTypeEN": "Sunny intervals",
+      "descIdWeatherTypePT": "Céu parcialmente nublado",
+      "idWeatherType": 3
+    },
+    "4": {
+      "descIdWeatherTypeEN": "Cloudy ",
+      "descIdWeatherTypePT": "Céu muito nublado ou encoberto",
+      "idWeatherType": 4
+    },
+    "5": {
+      "descIdWeatherTypeEN": "Cloudy (High cloud)",
+      "descIdWeatherTypePT": "Céu nublado por nuvens altas",
+      "idWeatherType": 5
+    },
+    "6": {
+      "descIdWeatherTypeEN": "Showers",
+      "descIdWeatherTypePT": "Aguaceiros",
+      "idWeatherType": 6
+    },
+    "7": {
+      "descIdWeatherTypeEN": "Light showers",
+      "descIdWeatherTypePT": "Aguaceiros fracos",
+      "idWeatherType": 7
+    },
+    "8": {
+      "descIdWeatherTypeEN": "Heavy showers",
+      "descIdWeatherTypePT": "Aguaceiros fortes",
+      "idWeatherType": 8
+    },
+    "9": {
+      "descIdWeatherTypeEN": "Rain",
+      "descIdWeatherTypePT": "Chuva",
+      "idWeatherType": 9
+    },
+    "10": {
+      "descIdWeatherTypeEN": "Light rain",
+      "descIdWeatherTypePT": "Chuva fraca ou chuvisco",
+      "idWeatherType": 10
+    },
+    "11": {
+      "descIdWeatherTypeEN": "Heavy rain",
+      "descIdWeatherTypePT": "Chuva forte",
+      "idWeatherType": 11
+    },
+    "12": {
+      "descIdWeatherTypeEN": "Intermittent rain",
+      "descIdWeatherTypePT": "Períodos de chuva",
+      "idWeatherType": 12
+    },
+    "13": {
+      "descIdWeatherTypeEN": "Intermittent ligth rain",
+      "descIdWeatherTypePT": "Períodos de chuva fraca",
+      "idWeatherType": 13
+    },
+    "14": {
+      "descIdWeatherTypeEN": "Intermittent heavy rain",
+      "descIdWeatherTypePT": "Períodos de chuva forte",
+      "idWeatherType": 14
+    },
+    "15": {
+      "descIdWeatherTypeEN": "Drizzle",
+      "descIdWeatherTypePT": "Chuvisco",
+      "idWeatherType": 15
+    },
+    "16": {
+      "descIdWeatherTypeEN": "Mist",
+      "descIdWeatherTypePT": "Neblina",
+      "idWeatherType": 16
+    },
+    "17": {
+      "descIdWeatherTypeEN": "Fog",
+      "descIdWeatherTypePT": "Nevoeiro ou nuvens baixas",
+      "idWeatherType": 17
+    },
+    "18": {
+      "descIdWeatherTypeEN": "Snow",
+      "descIdWeatherTypePT": "Neve",
+      "idWeatherType": 18
+    },
+    "19": {
+      "descIdWeatherTypeEN": "Thunderstorms",
+      "descIdWeatherTypePT": "Trovoada",
+      "idWeatherType": 19
+    },
+    "20": {
+      "descIdWeatherTypeEN": "Showers and thunderstorms",
+      "descIdWeatherTypePT": "Aguaceiros e trovoada",
+      "idWeatherType": 20
+    },
+    "21": {
+      "descIdWeatherTypeEN": "Hail",
+      "descIdWeatherTypePT": "Granizo",
+      "idWeatherType": 21
+    },
+    "22": {
+      "descIdWeatherTypeEN": "Frost",
+      "descIdWeatherTypePT": "Geada",
+      "idWeatherType": 22
+    },
+    "23": {
+      "descIdWeatherTypeEN": "Rain and thunderstorms",
+      "descIdWeatherTypePT": "Chuva  e trovoada",
+      "idWeatherType": 23
+    },
+    "24": {
+      "descIdWeatherTypeEN": "Convective clouds",
+      "descIdWeatherTypePT": "Nebulosidade convectiva",
+      "idWeatherType": 24
+    },
+    "25": {
+      "descIdWeatherTypeEN": "Partly cloudy",
+      "descIdWeatherTypePT": "Céu com períodos de muito nublado",
+      "idWeatherType": 25
+    },
+    "26": {
+      "descIdWeatherTypeEN": "Fog",
+      "descIdWeatherTypePT": "Nevoeiro",
+      "idWeatherType": 26
+    },
+    "27": {
+      "descIdWeatherTypeEN": "Cloudy",
+      "descIdWeatherTypePT": "Céu nublado",
+      "idWeatherType": 27
+    },
+    "-99": {
+      "descIdWeatherTypeEN": "--",
+      "descIdWeatherTypePT": "---",
+      "idWeatherType": -99
+    }
+  }

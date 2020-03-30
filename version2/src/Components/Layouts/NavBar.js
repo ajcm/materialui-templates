@@ -50,9 +50,7 @@ const NavBar = () => {
 
         <NavLink exact className={classes.links} activeClassName={classes.active} to="/">Home</NavLink>
         <NavLink className={classes.links}  activeClassName={classes.active}  to="/Locations">Locations</NavLink>
-        <NavLink className={classes.links}  activeClassName={classes.active}  to="/Debug/RestRequests">Requests</NavLink>
-
-
+    
         </Toolbar>
         </Typography>
     </AppBar>

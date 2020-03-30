@@ -25,3 +25,11 @@ result = new Map(arr.map(obj => [obj.key, obj.val]))
 .reduce ((map,i) => (map[i.idDistrito] = (map[i.idDistrito] ? [i.globalIdLocal, ...map[i.idDistrito]] : [i.globalIdLocal])
      ,map),{})
          
+// map locationId:location
+weatherService
+ .getLocations()
+.reduce ((map,i) => (map[i.globalIdLocal] = i,map),{})
+
+//weather types
+
+WEATHER_TYPES.reduce ((map,i) => (map[i.idWeatherType] = i,map),{})
