@@ -10,6 +10,8 @@ COPY ./template2/ ./template2/
 COPY ./template3/ ./template3/
 COPY ./version1/ ./version1/
 COPY ./version2/ ./version2/
+COPY ./weatherapp/ ./weatherapp/
+
 
 WORKDIR '/app/html/template1'
 RUN npm i .
@@ -32,6 +34,10 @@ WORKDIR '/app/html/version2'
 RUN npm i . 
 RUN npm run-script build
 
+WORKDIR '/app/html/weatherapp'
+RUN npm i . 
+RUN npm run-script build
+
 # NGINX static server
 #
 
@@ -39,12 +45,19 @@ RUN npm run-script build
 FROM ajcm/alpine-nginx:latest
 WORKDIR '/app/html'
 
-COPY --from=builder /app/html/ /app/html/
+COPY --from=builder /app/html/template1/build /app/html/template1
+COPY --from=builder /app/html/template2/build /app/html/template2
+COPY --from=builder /app/html/template3/build /app/html/template3
+
+COPY --from=builder /app/html/version1/build /app/html/version1
+COPY --from=builder /app/html/version2/build /app/html/version2
+
+COPY --from=builder /app/html/weatherapp/build /app/html/weatherapp
 
 ## copy conf
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 
-COPY ./index.html .
+COPY ./*.html ./
 
 
 ################
